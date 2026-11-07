@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Pin test forms</title>
+<style>
+  body { font: 15px/1.5 system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; color: #1b1e26; background: #f3f4f7; }
+  @media (prefers-color-scheme: dark) { body { color: #e9ebf0; background: #0f1116; } }
+  fieldset { border: 1px solid #8884; border-radius: 12px; padding: 16px 20px 20px; margin: 0 0 28px; }
+  legend { font-weight: 600; padding: 0 6px; }
+  input { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid #8886; }
+  .boxes { display: flex; gap: 8px; }
+  .boxes input { width: 44px; height: 52px; text-align: center; font-size: 22px; padding: 0; }
+  .note { font-size: 13px; opacity: .7; }
+  .value { font: 13px ui-monospace, monospace; opacity: .8; }
+</style>
+</head>
+<body>
+  <h1>Quick Pin test forms</h1>
+  <p class="note">Turn Quick Pin on for this page (toolbar button or Alt+Shift+P). The pad should attach to the
+    focused field among the first four sections. The last section holds look-alikes that must <em>not</em> be detected.</p>
+
+  <fieldset>
+    <legend>1 · Standard one-time code</legend>
+    <label>Verification code <input autocomplete="one-time-code" inputmode="numeric" maxlength="6" id="otc"></label>
+    <div class="value" data-for="otc"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>2 · Split boxes</legend>
+    <p class="note">Enter the 6-digit code we sent you</p>
+    <div class="boxes" id="split">
+      <input maxlength="1" inputmode="numeric" aria-label="Digit 1"><input maxlength="1" inputmode="numeric" aria-label="Digit 2">
+      <input maxlength="1" inputmode="numeric" aria-label="Digit 3"><input maxlength="1" inputmode="numeric" aria-label="Digit 4">
+      <input maxlength="1" inputmode="numeric" aria-label="Digit 5"><input maxlength="1" inputmode="numeric" aria-label="Digit 6">
+    </div>
+    <div class="value" data-for="split"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>3 · PIN (password type)</legend>
+    <label>PIN <input type="password" name="pinCode" inputmode="numeric" maxlength="4" id="pin"></label>
+    <div class="value" data-for="pin"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>4 · Added later (like a single-page app)</legend>
+    <div id="late"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Should be ignored</legend>
+    <p><label>Email <input type="email" name="email"></label></p>
+    <p><label>Zip code <input name="zipCode" inputmode="numeric" maxlength="5"></label></p>
+    <p><label>Card security code <input name="cvc" autocomplete="cc-csc" inputmode="numeric" maxlength="4"></label></p>
+    <p><label>Promo code <input name="promoCode" maxlength="8"></label></p>
+    <p><label>Password <input type="password" name="password"></label></p>
+  </fieldset>
+
+<script>
+  // Echo each test field's value so fills are visible.
+  const echo = () => {
+    document.querySelectorAll('.value').forEach(v => {
+      const t = document.getElementById(v.dataset.for);
+      v.textContent = 'value: ' + (t.tagName === 'INPUT' ? t.value : [...t.querySelectorAll('input')].map(i => i.value || '·').join(''));
+    });
+  };
+  document.addEventListener('input', echo);
+  echo();
+
+  // Split boxes: advance focus as digits are typed, and spread a pasted code.
+  const boxes = [...document.querySelectorAll('#split input')];
+  boxes.forEach((b, i) => {
+    b.addEventListener('input', () => { if (b.value && boxes[i + 1]) boxes[i + 1].focus(); });
+    b.addEventListener('paste', e => {
+      const code = (e.clipboardData.getData('text') || '').replace(/\D/g, '');
+      if (!code) return;
+      e.preventDefault();
+      boxes.forEach((x, j) => { x.value = code[j] || ''; });
+      boxes[Math.min(code.length, boxes.length) - 1].focus();
+      echo();
+    });
+  });
+
+  setTimeout(() => {
+    document.getElementById('late').innerHTML =
+      '<label>Two-factor code <input name="totp" id="totp" inputmode="numeric" maxlength="6"></label><div class="value" data-for="totp"></div>';
+    echo();
+  }, 3000);
+</script>
+</body>
+</html>

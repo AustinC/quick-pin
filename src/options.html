@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Pin preferences</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>Quick Pin</h1>
+
+    <section class="setting">
+      <label for="linger">Linger time</label>
+      <div class="row">
+        <input type="range" id="linger" min="120" max="2000" step="10" value="600">
+        <output id="lingerOut" for="linger">600 ms</output>
+        <button type="button" id="reset">Reset</button>
+      </div>
+      <p class="hint">How long the pointer must rest on a key before it registers. Default 600 ms.</p>
+    </section>
+
+    <section class="try">
+      <h2>Try it</h2>
+      <div class="output" id="output"><span class="val" id="outVal"></span></div>
+      <div id="padHost"></div>
+    </section>
+  </main>
+  <script src="pad.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

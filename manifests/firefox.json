@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Pin",
+  "version": "0.1.0",
+  "description": "Enter PINs and one-time codes by hovering over a dial pad. Off until you turn it on for a page.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": { "scripts": ["background.js"] },
+  "action": {
+    "default_title": "Quick Pin: turn on for this page",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png" }
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Turn Quick Pin on/off for this page"
+    }
+  },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "quick-pin@austinc.github.io",
+      "strict_min_version": "121.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  }
+}
