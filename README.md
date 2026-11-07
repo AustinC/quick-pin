@@ -1,5 +1,8 @@
 # Quick Pin
 
+<img width="1265" height="1010" alt="Peek 2026-11-06 17-26" src="https://github.com/user-attachments/assets/02d0e429-1101-4075-b40c-25b2509ecc05" />
+
+
 Enter PINs and one-time codes **without clicking or typing**: hover over the digits of a dial pad.
 
 - Move the pointer into the pad, then rest on a key. After the *linger time* (600 ms by default)
