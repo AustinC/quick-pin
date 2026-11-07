@@ -1,5 +1,8 @@
 # Quick Pin
 
+Do you have to enter a lot of 2FA pin codes into a desktop or laptop that cannot be copy/pasted because they are sent to a mobile device?
+If so, this is the browser extension for you.
+
 Enter PINs and one-time codes **without clicking or typing**: hover over the digits of a dial pad to enter the PIN.
 
 - Move the pointer into the pad, then rest on a key. After the *linger time* (600 ms by default)
