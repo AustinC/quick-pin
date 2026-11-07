@@ -22,9 +22,13 @@ I am not clicking in this demo, just hovering.
 
 ## How the extension behaves
 
-- **Off by default, on per page.** Nothing runs on any site until you click the Quick Pin toolbar
-  button (or press **Alt+Shift+P**) on that tab. That grants temporary access to the current page
-  only (`activeTab`). Click again to turn it off. Reloading or navigating away turns it off.
+- **Off by default, on per site.** Nothing runs anywhere until you click the Quick Pin toolbar
+  button on a site. The browser asks you to allow Quick Pin on that site (for example
+  `accounts.example.com`). From then on it runs there on every visit, including after browser
+  restarts, until you click the button on that site again. Turning a site off also gives back its
+  access permission.
+  Sites are matched by exact host name, so `example.com` and `login.example.com` are separate.
+  The extension never asks for access to all sites.
 - Once on, it looks for one-time-code / PIN fields and shows the pad next to the best match. It
   keeps watching the page, so codes requested later in a single-page app are picked up too.
 - The badge shows the state: grey **ON** = looking, blue **ON** = field found,
@@ -75,7 +79,11 @@ Get the extension files either way:
 4. Optional: pin Quick Pin to the toolbar from the puzzle-piece menu.
 
 It stays installed across restarts. To update, replace the folder and click the reload ↻ icon on
-the extension's card. Change the shortcut at `chrome://extensions/shortcuts`.
+the extension's card.
+
+To use it on local `file://` pages (like the test page below), also turn on **Allow access to file
+URLs** in the extension's *Details*. Or serve the folder instead: `python -m http.server` in the
+repo, then open `http://localhost:8000/demo/otp-test.html`.
 
 ### Firefox
 
@@ -93,7 +101,8 @@ Release builds of Firefox only install **signed** add-ons permanently, so there 
 2. Open `about:addons`, click the ⚙ gear → **Install Add-on From File…**, and choose
    `quick-pin-firefox-*.zip`. Renaming it to `.xpi` first also works.
 
-Requires Firefox 121 or newer. Change the shortcut in `about:addons` → ⚙ → *Manage Extension Shortcuts*.
+Requires Firefox 128 or newer. With a temporary add-on, the sites you turned on are forgotten when
+Firefox quits, because the add-on itself is removed. With a permanent install they're kept.
 
 ## Try it without installing
 
@@ -108,7 +117,7 @@ src/            extension source (shared by both browsers)
   pad.js          the dial pad widget
   detect.js       code-field heuristics + filling
   content.js      injected on demand: finds fields, positions the pad
-  background.js   toolbar button / shortcut → inject or toggle off
+  background.js   toolbar button → per-site opt-in, remembered across restarts
   options.*       preferences page (linger time + test pad)
 manifests/      chrome.json and firefox.json (MV3)
 icons/          toolbar/store icons (icon.svg is the source)

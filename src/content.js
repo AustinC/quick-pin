@@ -1,6 +1,6 @@
-// Quick Pin — content script. Injected only when the user clicks the toolbar button
-// (or presses the shortcut) on a page. Clicking again turns it off for that page.
-// The value of the final expression is returned to the background script.
+// Quick Pin — content script. Runs only on sites the user has turned Quick Pin on for
+// (by clicking the toolbar button there). The background script registers it for those
+// sites and calls __quickPin.stop() when a site is turned off.
 (() => {
   if (globalThis.__quickPin) return globalThis.__quickPin.status();
 
@@ -218,7 +218,7 @@
   }
 
   globalThis.__quickPin = {
-    toggle: () => (on ? deactivate() : activate()),
+    stop: () => (on ? deactivate() : status),
     status: () => status,
   };
   return activate();
