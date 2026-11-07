@@ -18,6 +18,9 @@ I am not clicking in this demo, just hovering.
 
 <img width="1265" height="1010" alt="Peek 2026-11-06 20-11" src="https://github.com/user-attachments/assets/a6938474-dba4-4a61-8b1e-96af45916c49" />
 
+Dark mode is supported:
+
+<img width="800" height="1067" alt="redacted_readme" src="https://github.com/user-attachments/assets/186b5a04-5bb8-4327-a45b-a0f3158b1793" />
 
 
 ## How the extension behaves
