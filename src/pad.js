@@ -18,10 +18,10 @@
     --hit: #1f45c8;
     --hit-ink: #1f45c8;
     --shadow: 0 1px 2px rgba(20,24,40,.06), 0 12px 32px rgba(20,24,40,.10);
-    --key: 84px;
-    --gap: 30px;
-    --digit-size: 34px;
-    --entry-size: 30px;
+    --key: 76px;
+    --gap: 20px;
+    --digit-size: 32px;
+    --entry-size: 28px;
     font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     color: var(--ink);
     user-select: none; -webkit-user-select: none;
@@ -45,11 +45,11 @@
     }
   }
   .qp, .qp * { box-sizing: border-box; }
-  .qp.qp-compact { --key: 60px; --gap: 20px; --digit-size: 27px; --entry-size: 24px; }
+  .qp.qp-compact { --key: 56px; --gap: 13px; --digit-size: 26px; --entry-size: 23px; }
 
   /* live entry */
-  .qp .dots { position: relative; height: 40px; margin: -10px 0 26px; display: flex; gap: 6px; align-items: center; justify-content: center; }
-  .qp.qp-compact .dots { height: 32px; margin: -6px 0 18px; gap: 4px; }
+  .qp .dots { position: relative; height: 40px; margin: -8px 0 18px; display: flex; gap: 6px; align-items: center; justify-content: center; }
+  .qp.qp-compact .dots { height: 30px; margin: -4px 0 12px; gap: 4px; }
   .qp .dot {
     display: inline-block; min-width: 1ch; text-align: center;
     font-size: var(--entry-size); font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1;
@@ -71,14 +71,14 @@
   /* pad */
   .qp .pad {
     position: relative;
-    padding: 38px 38px 74px;
-    border-radius: 28px;
+    padding: 26px 26px 58px;
+    border-radius: 24px;
     background: var(--surface);
     border: 1px solid var(--line);
     box-shadow: var(--shadow);
     touch-action: none;
   }
-  .qp.qp-compact .pad { padding: 26px 26px 58px; border-radius: 24px; }
+  .qp.qp-compact .pad { padding: 18px 18px 46px; border-radius: 20px; }
   .qp .pad::before { /* top/left/right glow: leaving through them submits */
     content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
     border: 2px solid var(--accent); border-bottom-color: transparent;
@@ -123,20 +123,20 @@
 
   /* cancel edge */
   .qp .cancel {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 52px;
+    position: absolute; left: 0; right: 0; bottom: 0; height: 44px;
     display: flex; align-items: center; justify-content: center;
     pointer-events: none;
-    border-radius: 0 0 28px 28px;
+    border-radius: 0 0 24px 24px;
     background: linear-gradient(to bottom, transparent, var(--danger-soft));
     opacity: .35; transition: opacity .3s;
   }
-  .qp.qp-compact .cancel { height: 42px; border-radius: 0 0 24px 24px; }
+  .qp.qp-compact .cancel { height: 36px; border-radius: 0 0 20px 20px; }
   .qp .cancel::after {
     content: ""; position: absolute; left: 22px; right: 22px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0;
     background: var(--danger);
   }
   .qp .cancel svg { width: 26px; height: 26px; color: var(--danger); }
-  .qp.qp-compact .cancel svg { width: 22px; height: 22px; }
+  .qp.qp-compact .cancel svg { width: 20px; height: 20px; }
   .qp .pad.armed .cancel { opacity: 1; }
   .qp .pad.armed .cancel svg { animation: qp-nudge 1.6s ease-in-out infinite; }
   @keyframes qp-nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
