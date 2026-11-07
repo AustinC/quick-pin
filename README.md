@@ -13,7 +13,7 @@ It ships as a browser extension for Chrome and Firefox (desktop only), plus a st
 
 I am not clicking in this demo, just hovering.
 
-<img width="1265" height="1010" alt="Peek 2026-11-06 17-26" src="https://github.com/user-attachments/assets/02d0e429-1101-4075-b40c-25b2509ecc05" />
+<img width="1265" height="1010" alt="Peek 2026-11-06 20-11" src="https://github.com/user-attachments/assets/a6938474-dba4-4a61-8b1e-96af45916c49" />
 
 
 
